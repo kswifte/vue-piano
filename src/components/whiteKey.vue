@@ -1,13 +1,9 @@
 <template>
-    <div class="white">
-        <div class="item" v-if="props.end" @click="createKey(props.data[0].value)">
+    <div class="whiteBox">
+        <div v-for="(k, i ) in props.data" :key="k.key" class="white"
+            @click="createKey(k.value)">
             <span></span>
-            <span>{{ props.end ? props.data[0].key : '' }}</span>
-        </div>
-        <div v-for="(k, i ) in wItem" :key="i" class="item"
-            @click="createKey(props.data[i].value)" v-else>
-            <span></span>
-            <span>{{ props.data[i].key }}</span>
+            <span>{{ k.key }}</span>
         </div>
     </div>
 </template>
@@ -15,19 +11,16 @@
 <script setup lang='ts'>
 import { createKey } from '@/utils/index'
 interface Props {
-    data: { key: string; value: number; }[],
-    first?: boolean,
-    end?: boolean
+    data: { key: string; value: number; }[]
 }
 const props = defineProps<Props>()
-const wItem = props.first ? 2 : 7
 </script>
 
 <style lang='less' scoped>
-.white {
+.whiteBox {
     display: flex;
 
-    .item {
+    .white {
         width: 1.8vw;
         height: 30vh;
         background-color: #f5f5f5;

@@ -1,17 +1,11 @@
 <template>
   <div class="container">
-    <div class="first">
-      <blackKey class="b" :data="first_b_data[0]" first></blackKey>
-      <whiteKey :data="first_w_data[0]" first></whiteKey>
+    <div class="item" v-for="(item, index) in data" :key="index">
+      <blackKey class="b" :data="item.filter(v => v.key.includes('#'))">
+      </blackKey>
+      <whiteKey :data="item.filter(v => !v.key.includes('#'))"></whiteKey>
     </div>
-    <div class="second" v-for="(item, index) in 7" :key="index">
-      <blackKey class="b" :data="first_b_data[item]"></blackKey>
-      <whiteKey :data="first_w_data[item]"></whiteKey>
-    </div>
-    <div class="third">
-      <whiteKey :data="first_w_data[8]" end class="b1">
-      </whiteKey>
-    </div>
+
   </div>
 </template>
 
@@ -19,12 +13,7 @@
 import whiteKey from '@/components/whiteKey.vue'
 import blackKey from '@/components/blackKey.vue'
 import data from './public/data';
-const first_b_data = data.map(i => {
-  return i.filter(v => v.key.includes('#'))
-})
-const first_w_data = data.map(i => {
-  return i.filter(v => !v.key.includes('#'))
-})
+console.log(data);
 </script>
 
 <style scoped lang="less">
@@ -37,44 +26,20 @@ const first_w_data = data.map(i => {
   // align-items: center;
   position: relative;
 
-  .first {
+  .item {
     display: flex;
     flex-direction: column;
+
+    // justify-content: space-between;
+    &:last-child {
+      transform: translateY(50%);
+      transition: none;
+    }
   }
 
   .b {
     transform: translateY(100%);
   }
 
-  .b1 {
-    transform: translateY(50%);
-  }
-
-  .second {
-    display: flex;
-    flex-direction: column;
-
-
-
-    // &:nth-child(1) {
-    //   margin-right: 2.7vw;
-    // }
-
-    // &:nth-child(2),
-    // &:nth-child(3),
-    // &:nth-child(4) {
-    //   margin-right: 2.8vw;
-    // }
-
-    // &:nth-child(5),
-    // &:nth-child(6),
-    // &:nth-child(7) {
-    //   margin-right: 2.82vw;
-    // }
-
-    // .b {
-    //   margin-right: 2.7vw;
-    // }
-  }
 }
 </style>

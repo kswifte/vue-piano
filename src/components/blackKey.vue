@@ -1,25 +1,24 @@
 <template>
-    <div class="black">
-        <div class="item" v-for="(item, index) in bItem" :key="index"
-            @click="createKey(props.data[index].value)"></div>
+    <div class="blackBox">
+        <div class="black" v-for="(item, index) in props.data" :key="index"
+            @click="createKey(item.value)"></div>
     </div>
 </template>
 
 <script setup lang='ts'>
 import { createKey } from '@/utils/index'
 interface Props {
-    data: { key: string; value: number; }[],
-    first?: boolean
+    data: { key: string; value: number; }[]
 }
 const props = defineProps<Props>()
-const bItem = props.first ? 1 : 5
+console.log(props.data);
 </script>
 
 <style lang='less' scoped>
-.black {
+.blackBox {
     display: flex;
 
-    .item {
+    .black {
         width: 0.95vw;
         height: 15vh;
         background-color: #141313;
